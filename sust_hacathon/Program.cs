@@ -27,7 +27,7 @@ app.MapGet("/", () => Results.Redirect("/swagger"));
 app.MapGet("/swagger/v1/swagger.json", () => Results.Content(GetOpenApiDocument(), "application/json"));
 
 app.MapGet("/swagger", () => Results.Content(GetSwaggerUiHtml(), "text/html"));
-app.MapGet("/swagger/", () => Results.Content(GetSwaggerUiHtml(), "text/html"));
+
 app.MapGet("/swagger/index.html", () => Results.Content(GetSwaggerUiHtml(), "text/html"));
 
 // ---- Global exception handler: never leak stack traces / secrets, never crash the process ----
