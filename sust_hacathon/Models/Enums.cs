@@ -1,6 +1,9 @@
 namespace QueueStormInvestigator.Models;
 
-
+// All enum string values MUST match the spec exactly (lowercase, exact spelling).
+// We never rely on C# enum auto-serialization for the wire format — we map
+// explicitly to/from these literal strings so a typo here is caught at compile time
+// but the JSON on the wire is always controlled by us, not by enum naming.
 
 public static class CaseType
 {
@@ -35,7 +38,8 @@ public static class Department
         MerchantOperations, AgentOperations, FraudRisk
     };
 
-   
+    // Default routing table from spec Section 7.2 — used as a fallback/normalizer
+    // if the reasoning layer (LLM or rules) gives a case_type but an inconsistent department.
     public static string DefaultFor(string caseType) => caseType switch
     {
         CaseType.WrongTransfer => DisputeResolution,
@@ -48,7 +52,12 @@ public static class Department
         _ => CustomerSupport
     };
 
-
+    /// <summary>
+    /// Verdict-aware routing. Per spec Section 7.2: dispute_resolution handles
+    /// wrong_transfer and CONTESTED refund_request specifically — a routine,
+    /// evidence-consistent refund_request (e.g. "changed my mind") routes to
+    /// customer_support instead, since there's nothing to dispute.
+    /// </summary>
     public static string DefaultFor(string caseType, string evidenceVerdict)
     {
         if (caseType == CaseType.RefundRequest)
