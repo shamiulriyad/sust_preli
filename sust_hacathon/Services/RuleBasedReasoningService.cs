@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.RegularExpressions;
 using QueueStormInvestigator.Models;
 
@@ -206,13 +207,31 @@ public class RuleBasedReasoningService : IReasoningService
 
     private static decimal? ExtractAmount(string text)
     {
+        // Convert Bangla numerals (০-৯) to ASCII digits (0-9) first, since the
+        // amount regex below only recognizes ASCII digits. Without this, complaints
+        // written entirely in Bangla script (e.g. "২০০০ টাকা") would never match
+        // any amount, weakening the transaction match score for genuinely valid cases.
+        string normalized = ConvertBanglaDigits(text);
+
         // Matches "5000 taka", "5,000 BDT", "tk 5000", bare numbers near currency words
-        var match = Regex.Match(text, @"(\d[\d,]*)\s*(taka|tk|bdt|৫০০০)?", RegexOptions.IgnoreCase);
+        var match = Regex.Match(normalized, @"(\d[\d,]*)\s*(taka|tk|bdt|টাকা)?", RegexOptions.IgnoreCase);
         if (match.Success && decimal.TryParse(match.Groups[1].Value.Replace(",", ""), out var amount))
         {
             return amount;
         }
         return null;
+    }
+
+    private static string ConvertBanglaDigits(string text)
+    {
+        const string banglaDigits = "০১২৩৪৫৬৭৮৯";
+        var sb = new StringBuilder(text.Length);
+        foreach (char c in text)
+        {
+            int idx = banglaDigits.IndexOf(c);
+            sb.Append(idx >= 0 ? (char)('0' + idx) : c);
+        }
+        return sb.ToString();
     }
 
     private static string? ExtractPhoneNumber(string text)

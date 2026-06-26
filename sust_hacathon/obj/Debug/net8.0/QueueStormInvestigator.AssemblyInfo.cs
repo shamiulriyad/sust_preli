@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QueueStormInvestigator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53c38d9fc2d4f4152203fdb7bdabcdb5aa337772")]
 [assembly: System.Reflection.AssemblyProductAttribute("QueueStormInvestigator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QueueStormInvestigator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

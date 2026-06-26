@@ -357,11 +357,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\hacathon dataset\\sust\\QueueStormInvestigator\\QueueStormInvestigator\\QueueStormInvestigator.csproj",
+      "projectUniqueName": "E:\\hacathon dataset\\sust\\sust_preli\\sust_hacathon\\QueueStormInvestigator.csproj",
       "projectName": "QueueStormInvestigator",
-      "projectPath": "E:\\hacathon dataset\\sust\\QueueStormInvestigator\\QueueStormInvestigator\\QueueStormInvestigator.csproj",
+      "projectPath": "E:\\hacathon dataset\\sust\\sust_preli\\sust_hacathon\\QueueStormInvestigator.csproj",
       "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "E:\\hacathon dataset\\sust\\QueueStormInvestigator\\QueueStormInvestigator\\obj\\",
+      "outputPath": "E:\\hacathon dataset\\sust\\sust_preli\\sust_hacathon\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
